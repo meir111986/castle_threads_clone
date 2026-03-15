@@ -12,4 +12,6 @@ class Post {
     required this.createdAt,
     required this.likes,
   });
+
+  Object? savePost() {}
 }

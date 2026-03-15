@@ -212,8 +212,8 @@ return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.like
 /// @nodoc
 @JsonSerializable()
 
-class _PostModel implements PostModel {
-  const _PostModel({@HiveField(0) required this.id, @HiveField(1) required this.content, @HiveField(2) required this.authorId, @HiveField(3) required this.createdAt, @HiveField(4) required this.likes});
+class _PostModel extends PostModel {
+  const _PostModel({@HiveField(0) required this.id, @HiveField(1) required this.content, @HiveField(2) required this.authorId, @HiveField(3) required this.createdAt, @HiveField(4) required this.likes}): super._();
   factory _PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
 
 @override@HiveField(0) final  String id;

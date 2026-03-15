@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:threads_clone/domain/entities/post.dart';
+import 'package:threads_clone/presentation/screens/create_post_screen.dart';
 import 'package:threads_clone/presentation/widgets/post_card.dart';
 
 class FeedScreen extends StatelessWidget {
@@ -38,6 +39,17 @@ class FeedScreen extends StatelessWidget {
           'Threads v2.0',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => CreatePostScreen()),
+              );
+            },
+            icon: Icon(Icons.edit_outlined),
+          ),
+        ],
       ),
       body: ListView.separated(
         padding: EdgeInsets.symmetric(vertical: 8),
