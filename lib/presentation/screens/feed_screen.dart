@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:threads_clone/domain/entities/post.dart';
+// import 'package:threads_clone/domain/entities/post.dart';
 import 'package:threads_clone/presentation/bloc/feed_cubit.dart';
 import 'package:threads_clone/presentation/bloc/feed_state.dart';
 import 'package:threads_clone/presentation/screens/create_post_screen.dart';
