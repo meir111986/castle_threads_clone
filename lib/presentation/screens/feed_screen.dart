@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:threads_clone/domain/entities/post.dart';
 import 'package:threads_clone/presentation/bloc/feed_cubit.dart';
+import 'package:threads_clone/presentation/bloc/feed_state.dart';
 import 'package:threads_clone/presentation/screens/create_post_screen.dart';
 import 'package:threads_clone/presentation/widgets/post_card.dart';
 
@@ -34,8 +35,8 @@ class FeedScreen extends StatelessWidget {
     //   ),
     // ];
 
-    final state = context.watch<FeedCubit>().state;
-    final posts = state.posts;
+    // final state = context.watch<FeedCubit>().state;
+    // final posts = state.posts;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,14 +58,20 @@ class FeedScreen extends StatelessWidget {
         ],
       ),
 
-      body: ListView.separated(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        itemBuilder: (context, index) {
-          final post = posts[index];
-          return PostCard(post: post);
+      body: BlocBuilder<FeedCubit, FeedState>(
+        builder: (context, state) {
+          final posts = state.posts;
+
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return PostCard(post: post);
+            },
+            separatorBuilder: (_, _) => const Divider(height: 1),
+          );
         },
-        separatorBuilder: (_, _) => Divider(height: 1),
-        itemCount: posts.length,
       ),
     );
   }
