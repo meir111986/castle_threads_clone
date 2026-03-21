@@ -51,4 +51,22 @@ class FeedCubit extends Cubit<FeedState> {
       );
     }
   }
+
+  Future<void> likePost(String postId) async {
+    final updatedPost = state.posts.map((post) {
+      if (post.id != postId) return post;
+
+      return post.copyWith(
+        likes: post.isLiked ? post.likes - 1 : post.likes + 1,
+        isLiked: !post.isLiked,
+      );
+    }).toList();
+
+    try {
+      await _repository.likePost(postId);
+      emit(state.copyWith(posts: updatedPost));
+    } catch (e) {
+      await loadFeed();
+    }
+  }
 }

@@ -58,18 +58,25 @@ class FeedScreen extends StatelessWidget {
         ],
       ),
 
-      body: BlocBuilder<FeedCubit, FeedState>(
+      body: BlocConsumer<FeedCubit, FeedState>(
+        listener: ((context, state) {}),
         builder: (context, state) {
-          final posts = state.posts;
+          if (state.posts.isEmpty) {
+            return Text('Список пуст');
+          }
+
+          if (state.status == FeedStatus.loading) {
+            return Center(child: CircularProgressIndicator());
+          }
 
           return ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            itemCount: posts.length,
             itemBuilder: (context, index) {
-              final post = posts[index];
+              final post = state.posts[index];
               return PostCard(post: post);
             },
             separatorBuilder: (_, _) => const Divider(height: 1),
+            itemCount: state.posts.length,
           );
         },
       ),

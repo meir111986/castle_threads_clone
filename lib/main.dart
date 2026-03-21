@@ -71,11 +71,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localDataSource = LocalPostDataSource();
-    final repository = PostRepositoryImpl(localDataSource);
+    final local = LocalPostDataSource();
+    final repository = PostRepositoryImpl(local);
 
     return BlocProvider(
-      create: (context) => FeedCubit(repository)..loadFeed(),
+      create: (_) => FeedCubit(repository)..loadFeed(),
       child: MaterialApp(
         title: 'Threads Clone',
         theme: ThemeData(
