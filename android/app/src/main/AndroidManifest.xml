@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <user-permission android:name="android.permission.CAMERA"/>
+    <user-permission android:name="android:permission.READ_MEDIA_IMAGES"/>
+    
     <application
         android:label="threads_clone"
         android:name="${applicationName}"

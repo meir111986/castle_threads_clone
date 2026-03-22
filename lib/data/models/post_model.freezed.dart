@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostModel {
 
-@HiveField(0) String get id;@HiveField(1) String get content;@HiveField(2) String get authorId;@HiveField(3) String get createdAt;@HiveField(4) int get likes;@HiveField(5) bool get isLiked;
+@HiveField(0) String get id;@HiveField(1) String get content;@HiveField(2) String get authorId;@HiveField(3) String get createdAt;@HiveField(4) int get likes;@HiveField(5) bool get isLiked;@HiveField(6) String? get imageUrl;
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PostModelCopyWith<PostModel> get copyWith => _$PostModelCopyWithImpl<PostModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostModel&&(identical(other.id, id) || other.id == id)&&(identical(other.content, content) || other.content == content)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostModel&&(identical(other.id, id) || other.id == id)&&(identical(other.content, content) || other.content == content)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,content,authorId,createdAt,likes,isLiked);
+int get hashCode => Object.hash(runtimeType,id,content,authorId,createdAt,likes,isLiked,imageUrl);
 
 @override
 String toString() {
-  return 'PostModel(id: $id, content: $content, authorId: $authorId, createdAt: $createdAt, likes: $likes, isLiked: $isLiked)';
+  return 'PostModel(id: $id, content: $content, authorId: $authorId, createdAt: $createdAt, likes: $likes, isLiked: $isLiked, imageUrl: $imageUrl)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $PostModelCopyWith<$Res>  {
   factory $PostModelCopyWith(PostModel value, $Res Function(PostModel) _then) = _$PostModelCopyWithImpl;
 @useResult
 $Res call({
-@HiveField(0) String id,@HiveField(1) String content,@HiveField(2) String authorId,@HiveField(3) String createdAt,@HiveField(4) int likes,@HiveField(5) bool isLiked
+@HiveField(0) String id,@HiveField(1) String content,@HiveField(2) String authorId,@HiveField(3) String createdAt,@HiveField(4) int likes,@HiveField(5) bool isLiked,@HiveField(6) String? imageUrl
 });
 
 
@@ -65,7 +65,7 @@ class _$PostModelCopyWithImpl<$Res>
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? content = null,Object? authorId = null,Object? createdAt = null,Object? likes = null,Object? isLiked = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? content = null,Object? authorId = null,Object? createdAt = null,Object? likes = null,Object? isLiked = null,Object? imageUrl = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as String,authorId: null == authorId ? _self.authorId : authorId // ignore: cast
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as String,likes: null == likes ? _self.likes : likes // ignore: cast_nullable_to_non_nullable
 as int,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,imageUrl: freezed == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@HiveField(0)  String id, @HiveField(1)  String content, @HiveField(2)  String authorId, @HiveField(3)  String createdAt, @HiveField(4)  int likes, @HiveField(5)  bool isLiked)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@HiveField(0)  String id, @HiveField(1)  String content, @HiveField(2)  String authorId, @HiveField(3)  String createdAt, @HiveField(4)  int likes, @HiveField(5)  bool isLiked, @HiveField(6)  String? imageUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PostModel() when $default != null:
-return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.likes,_that.isLiked);case _:
+return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.likes,_that.isLiked,_that.imageUrl);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.like
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@HiveField(0)  String id, @HiveField(1)  String content, @HiveField(2)  String authorId, @HiveField(3)  String createdAt, @HiveField(4)  int likes, @HiveField(5)  bool isLiked)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@HiveField(0)  String id, @HiveField(1)  String content, @HiveField(2)  String authorId, @HiveField(3)  String createdAt, @HiveField(4)  int likes, @HiveField(5)  bool isLiked, @HiveField(6)  String? imageUrl)  $default,) {final _that = this;
 switch (_that) {
 case _PostModel():
-return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.likes,_that.isLiked);case _:
+return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.likes,_that.isLiked,_that.imageUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.like
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@HiveField(0)  String id, @HiveField(1)  String content, @HiveField(2)  String authorId, @HiveField(3)  String createdAt, @HiveField(4)  int likes, @HiveField(5)  bool isLiked)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@HiveField(0)  String id, @HiveField(1)  String content, @HiveField(2)  String authorId, @HiveField(3)  String createdAt, @HiveField(4)  int likes, @HiveField(5)  bool isLiked, @HiveField(6)  String? imageUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _PostModel() when $default != null:
-return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.likes,_that.isLiked);case _:
+return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.likes,_that.isLiked,_that.imageUrl);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.id,_that.content,_that.authorId,_that.createdAt,_that.like
 @JsonSerializable()
 
 class _PostModel extends PostModel {
-  const _PostModel({@HiveField(0) required this.id, @HiveField(1) required this.content, @HiveField(2) required this.authorId, @HiveField(3) required this.createdAt, @HiveField(4) required this.likes, @HiveField(5) this.isLiked = false}): super._();
+  const _PostModel({@HiveField(0) required this.id, @HiveField(1) required this.content, @HiveField(2) required this.authorId, @HiveField(3) required this.createdAt, @HiveField(4) required this.likes, @HiveField(5) this.isLiked = false, @HiveField(6) this.imageUrl}): super._();
   factory _PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
 
 @override@HiveField(0) final  String id;
@@ -223,6 +224,7 @@ class _PostModel extends PostModel {
 @override@HiveField(3) final  String createdAt;
 @override@HiveField(4) final  int likes;
 @override@JsonKey()@HiveField(5) final  bool isLiked;
+@override@HiveField(6) final  String? imageUrl;
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
@@ -237,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostModel&&(identical(other.id, id) || other.id == id)&&(identical(other.content, content) || other.content == content)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostModel&&(identical(other.id, id) || other.id == id)&&(identical(other.content, content) || other.content == content)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,content,authorId,createdAt,likes,isLiked);
+int get hashCode => Object.hash(runtimeType,id,content,authorId,createdAt,likes,isLiked,imageUrl);
 
 @override
 String toString() {
-  return 'PostModel(id: $id, content: $content, authorId: $authorId, createdAt: $createdAt, likes: $likes, isLiked: $isLiked)';
+  return 'PostModel(id: $id, content: $content, authorId: $authorId, createdAt: $createdAt, likes: $likes, isLiked: $isLiked, imageUrl: $imageUrl)';
 }
 
 
@@ -257,7 +259,7 @@ abstract mixin class _$PostModelCopyWith<$Res> implements $PostModelCopyWith<$Re
   factory _$PostModelCopyWith(_PostModel value, $Res Function(_PostModel) _then) = __$PostModelCopyWithImpl;
 @override @useResult
 $Res call({
-@HiveField(0) String id,@HiveField(1) String content,@HiveField(2) String authorId,@HiveField(3) String createdAt,@HiveField(4) int likes,@HiveField(5) bool isLiked
+@HiveField(0) String id,@HiveField(1) String content,@HiveField(2) String authorId,@HiveField(3) String createdAt,@HiveField(4) int likes,@HiveField(5) bool isLiked,@HiveField(6) String? imageUrl
 });
 
 
@@ -274,7 +276,7 @@ class __$PostModelCopyWithImpl<$Res>
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? content = null,Object? authorId = null,Object? createdAt = null,Object? likes = null,Object? isLiked = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? content = null,Object? authorId = null,Object? createdAt = null,Object? likes = null,Object? isLiked = null,Object? imageUrl = freezed,}) {
   return _then(_PostModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
@@ -282,7 +284,8 @@ as String,authorId: null == authorId ? _self.authorId : authorId // ignore: cast
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as String,likes: null == likes ? _self.likes : likes // ignore: cast_nullable_to_non_nullable
 as int,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,imageUrl: freezed == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
