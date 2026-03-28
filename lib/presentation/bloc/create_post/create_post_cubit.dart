@@ -21,7 +21,13 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       imageQuality: 80,
     );
 
+    print('object');
+    print(file);
+
     if (file == null) return;
+
+    print('got gallery');
+    print(file.path);
 
     emit(state.copyWith(imageUrl: file.path));
   }

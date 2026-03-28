@@ -20,11 +20,11 @@ class PostCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  post.authorId,
+                  post.authorId ?? 'null',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 6),
-                Text(post.content, style: TextStyle(fontSize: 15)),
+                Text(post.content ?? '', style: TextStyle(fontSize: 15)),
                 const SizedBox(height: 10),
 
                 Row(

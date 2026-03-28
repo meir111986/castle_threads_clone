@@ -35,14 +35,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       appBar: AppBar(
         title: Text('Новый пост'),
         actions: [
-          BlocListener<CreatePostCubit, CreatePostState>(
+          BlocConsumer<CreatePostCubit, CreatePostState>(
             listenWhen: (prev, curr) => prev.status != curr.status,
             listener: (context, state) {
               if (state.status == CreatePostStatus.saccess) {
                 context.read<FeedCubit>().loadFeed();
                 Navigator.pop(context);
               }
-
               if (state.status == CreatePostStatus.failure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -53,15 +52,19 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               }
             },
 
-            child: TextButton(
-              onPressed: () {
-                context.read<CreatePostCubit>().submit();
-              },
-              child: Text(
-                'Опубликовать',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
+            builder: (context, state) {
+              return TextButton(
+                onPressed: state.canSubmit
+                    ? () {
+                        context.read<CreatePostCubit>().submit();
+                      }
+                    : null,
+                child: Text(
+                  'Опубликовать',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -81,47 +84,50 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       hintText: 'Что у вас нового?',
                       border: InputBorder.none,
                     ),
+                    onChanged: (value) {
+                      context.read<CreatePostCubit>().contentChanged(value);
+                    },
                   ),
                 ),
-                const SizedBox(width: 12),
-                BlocBuilder<CreatePostCubit, CreatePostState>(
-                  builder: (context, state) {
-                    if (state.imageUrl == null) {
-                      return SizedBox.shrink();
-                    }
-                    return Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.file(
-                            File(state.imageUrl!),
-                            width: double.infinity,
-                            height: 220,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          top: 8,
-                          right: 8,
-                          child: GestureDetector(
-                            onTap: () {
-                              context.read<CreatePostCubit>().removeImage();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.black54,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(Icons.close),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
               ],
+            ),
+            const SizedBox(height: 20),
+            BlocBuilder<CreatePostCubit, CreatePostState>(
+              builder: (context, state) {
+                if (state.imageUrl == null) {
+                  return SizedBox.shrink();
+                }
+                return Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.file(
+                        File(state.imageUrl!),
+                        width: double.infinity,
+                        height: 220,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<CreatePostCubit>().removeImage();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(Icons.close),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
 
             SizedBox(height: 12),
