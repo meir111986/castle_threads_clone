@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:threads_clone/presentation/bloc/create_post/create_post_cubit.dart';
 import 'package:threads_clone/presentation/bloc/create_post/create_post_state.dart';
-import 'package:threads_clone/presentation/bloc/feed_cubit.dart';
-import 'package:threads_clone/presentation/bloc/feed_state.dart';
+import 'package:threads_clone/presentation/bloc/profile/feed_cubit.dart';
+// import 'package:threads_clone/presentation/bloc/feed_state.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
