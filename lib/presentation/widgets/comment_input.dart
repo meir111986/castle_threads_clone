@@ -11,13 +11,7 @@ class CommentInput extends StatefulWidget {
 }
 
 class _CommentInputState extends State<CommentInput> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller = TextEditingController();
-    super.initState();
-  }
+  final _controller = TextEditingController();
 
   @override
   void dispose() {
@@ -27,42 +21,59 @@ class _CommentInputState extends State<CommentInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Row(
-        children: [
-          const CircleAvatar(radius: 20, child: Icon(Icons.person)),
-          Expanded(
-            child: TextFormField(
-              controller: _controller,
-              onChanged: context.read<CommentsCubit>().inputChanged,
-              decoration: InputDecoration(
-                hintText: 'Комментарий...',
-                border: InputBorder.none,
-                hintStyle: TextStyle(fontSize: 14),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 8,
+          top: 8,
+          bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? 4 : 8,
+        ),
+        child: Row(
+          children: [
+            const CircleAvatar(
+              radius: 16,
+              backgroundColor: Colors.black,
+              child: Text(
+                'M',
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ),
-          ),
-
-          BlocBuilder<CommentsCubit, CommentsState>(
-            builder: (context, state) {
-              return IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: state.canSubmit
-                    ? () {
-                        context.read<CommentsCubit>().addComment();
-                        _controller.clear();
-                      }
-                    : null,
-              );
-            },
-          ),
-        ],
+            SizedBox(width: 20),
+            Expanded(
+              child: BlocBuilder<CommentsCubit, CommentsState>(
+                buildWhen: (prev, curr) => prev.inputText != curr.inputText,
+                builder: (context, state) {
+                  return TextFormField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      hintText: 'Добавить комментарий...',
+                      border: InputBorder.none,
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                    onChanged: (String value) {
+                      context.read<CommentsCubit>().inputChanged(value);
+                    },
+                    onFieldSubmitted: (_) => _submit(context),
+                  );
+                },
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                _submit(context);
+              },
+              icon: Icon(Icons.send_rounded),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void _submit(BuildContext context) {
+    context.read<CommentsCubit>().addComment();
+    _controller.clear();
   }
 }

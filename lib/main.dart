@@ -5,7 +5,7 @@ import 'package:threads_clone/data/models/post_model.dart';
 import 'package:threads_clone/data/repositories/post_repository_impl.dart';
 import 'package:threads_clone/domain/entities/post.dart';
 // import 'package:threads_clone/domain/repositories/post_repository.dart';
-import 'package:threads_clone/presentation/bloc/profile/feed_cubit.dart';
+import 'package:threads_clone/presentation/bloc/feed_cubit.dart';
 import 'package:threads_clone/presentation/screens/feed_screen.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 

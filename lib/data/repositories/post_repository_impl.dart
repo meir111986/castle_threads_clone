@@ -33,6 +33,13 @@ class PostRepositoryImpl implements PostRepository {
       likes: model.isLiked ? likes - 1 : likes + 1,
       isLiked: !model.isLiked,
     );
+
     await _local.updatePost(updated);
+  }
+
+  @override
+  Future<List<Post>> getPostsByUser(String authorId) async {
+    final models = await _local.getPostByUser(authorId);
+    return models.map((m) => m.toEntity()).toList();
   }
 }
