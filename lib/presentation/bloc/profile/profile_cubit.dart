@@ -52,7 +52,13 @@ class ProfileCubit extends Cubit<ProfileState> {
         bio: 'Backend Developer',
         postsCount: postCount,
       ),
-      '3': User(id: '3', username: 'Qana', avatarUrl: '', bio: 'IT user'),
+      '3': User(
+        id: '3',
+        username: 'Qana',
+        avatarUrl: '',
+        bio: 'IT user',
+        postsCount: postCount,
+      ),
     };
     return mockUsers[userId] ??
         User(
