@@ -1,6 +1,5 @@
 import 'package:supabase/supabase.dart';
 import 'package:threads_clone/data/models/comment_model.dart';
-import 'package:threads_clone/data/models/post_model.dart';
 
 class RemoteCommentDataSource {
   final SupabaseClient _client;
