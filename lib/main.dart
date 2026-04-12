@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:threads_clone/data/datasources/local_post_data_source.dart';
+// import 'package:threads_clone/data/datasources/local_post_data_source.dart';
+// import 'package:threads_clone/data/repositories/post_repository_impl.dart';
 import 'package:threads_clone/data/models/post_model.dart';
-import 'package:threads_clone/data/repositories/post_repository_impl.dart';
 import 'package:threads_clone/domain/entities/post.dart';
 import 'package:threads_clone/domain/repositories/post_repository.dart';
 import 'package:threads_clone/locator.dart';
@@ -25,6 +25,8 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PostModelAdapter());
   await _seedData();
+
+  await setupDependencies();
 
   runApp(const MyApp());
 }
