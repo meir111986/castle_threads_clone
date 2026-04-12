@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:threads_clone/data/datasources/local_post_data_source.dart';
 import 'package:threads_clone/data/repositories/post_repository_impl.dart';
+import 'package:threads_clone/domain/repositories/post_repository.dart';
+import 'package:threads_clone/locator.dart';
 import 'package:threads_clone/presentation/bloc/create_post/create_post_cubit.dart';
 // import 'package:threads_clone/domain/entities/post.dart';
 import 'package:threads_clone/presentation/bloc/feed_cubit.dart';
@@ -25,14 +27,17 @@ class FeedScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              final local = LocalPostDataSource();
-              final repository = PostRepositoryImpl(local);
-              final imagePicker = ImagePicker();
+              // final local = LocalPostDataSource();
+              // final repository = PostRepositoryImpl(local);
+              // final imagePicker = ImagePicker();
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (_) => BlocProvider(
-                    create: (_) => CreatePostCubit(repository, imagePicker),
+                    create: (_) => CreatePostCubit(
+                      locator<PostRepository>(),
+                      locator<ImagePicker>(),
+                    ),
                     child: CreatePostScreen(),
                   ),
                 ),

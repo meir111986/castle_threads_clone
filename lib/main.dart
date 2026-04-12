@@ -6,6 +6,8 @@ import 'package:threads_clone/data/datasources/local_post_data_source.dart';
 import 'package:threads_clone/data/models/post_model.dart';
 import 'package:threads_clone/data/repositories/post_repository_impl.dart';
 import 'package:threads_clone/domain/entities/post.dart';
+import 'package:threads_clone/domain/repositories/post_repository.dart';
+import 'package:threads_clone/locator.dart';
 import 'package:threads_clone/presentation/bloc/feed_cubit.dart';
 import 'package:threads_clone/presentation/screens/feed_screen.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
@@ -79,11 +81,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final local = LocalPostDataSource();
-    final repository = PostRepositoryImpl(local);
+    // final local = LocalPostDataSource();
+    // final repository = PostRepositoryImpl(local);
 
     return BlocProvider(
-      create: (_) => FeedCubit(repository)..loadFeed(),
+      create: (_) => FeedCubit(locator<PostRepository>())..loadFeed(),
       child: MaterialApp(
         title: 'Threads Clone',
         theme: ThemeData(
