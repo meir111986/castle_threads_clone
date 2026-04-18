@@ -5,8 +5,10 @@ import 'package:threads_clone/data/datasources/local_comment_data_source.dart';
 import 'package:threads_clone/data/datasources/local_post_data_source.dart';
 import 'package:threads_clone/data/datasources/remote_comment_data_source.dart';
 import 'package:threads_clone/data/datasources/remote_post_data_source.dart';
+import 'package:threads_clone/data/repositories/auth_repository_impl.dart';
 import 'package:threads_clone/data/repositories/comment_repository_impl.dart';
 import 'package:threads_clone/data/repositories/post_repository_impl.dart';
+import 'package:threads_clone/domain/repositories/auth_repository.dart';
 import 'package:threads_clone/domain/repositories/comment_repository.dart';
 import 'package:threads_clone/domain/repositories/post_repository.dart';
 
@@ -48,5 +50,9 @@ Future<void> setupDependencies() async {
       locator<LocalCommentDataSource>(),
       locator<RemoteCommentDataSource>(),
     ),
+  );
+
+  locator.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(locator<SupabaseClient>()),
   );
 }

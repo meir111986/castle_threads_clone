@@ -30,8 +30,10 @@ class CommentRepositoryImpl implements CommentRepository {
       }
 
       return remoteComments.map((model) => model.toEntity()).toList();
-    } catch (e) {
+    } catch (e, s) {
+      print('object $s');
       final models = await _local.getCommentsByPost(postId);
+
       return models.map((model) => model.toEntity()).toList();
     }
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:threads_clone/data/datasources/local_comment_data_source.dart';
-import 'package:threads_clone/data/repositories/comment_repository_impl.dart';
+// import 'package:threads_clone/data/datasources/local_comment_data_source.dart';
+// import 'package:threads_clone/data/repositories/comment_repository_impl.dart';
 import 'package:threads_clone/domain/entities/post.dart';
+import 'package:threads_clone/domain/repositories/auth_repository.dart';
 import 'package:threads_clone/domain/repositories/comment_repository.dart';
 import 'package:threads_clone/locator.dart';
 import 'package:threads_clone/presentation/bloc/comments/comments_cubit.dart';
@@ -25,7 +26,8 @@ class CommentsScreen extends StatelessWidget {
             // CommentRepositoryImpl(LocalCommentDataSource()),
             locator<CommentRepository>(),
             post.id!,
-          ),
+            locator<AuthRepository>(),
+          )..loadComment(),
           child: CommentsScreen(post: post),
         );
       },
